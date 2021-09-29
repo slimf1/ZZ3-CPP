@@ -8,7 +8,7 @@ class Polaire;
 
 class Point {
 public:
-    Point() {};
+    Point() = default;
 
     virtual void afficher(std::ostream& stream) const = 0;
 

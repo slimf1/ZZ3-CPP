@@ -39,3 +39,17 @@ void Cartesien::convertir(Cartesien& point) const {
     point.setX(_x);
     point.setY(_y);
 }
+
+Cartesien operator+(const Cartesien& a, const Cartesien& b) {
+    Cartesien res;
+    res.setX(a.getX() + b.getX());
+    res.setY(a.getY() + b.getY());
+    return res;
+}
+
+Cartesien operator/(const Cartesien& a, double scal) {
+    Cartesien res;
+    res.setX(a.getX() / scal);
+    res.setY(a.getY() / scal);
+    return res;
+}

@@ -19,4 +19,14 @@ public:
     Nuage::const_iterator end();
 };
 
+Cartesien barycentre(Nuage& nuage); 
+
+struct BarycentreCartesien {
+    Cartesien operator()(Nuage& nuage);
+};
+
+struct BarycentrePolaire {
+    Polaire operator()(Nuage& nuage);
+};
+
 #endif
