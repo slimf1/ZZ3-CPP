@@ -1,6 +1,9 @@
 #include "cartesien.hpp"
 #include "polaire.hpp"
 
+Cartesien::Cartesien(const Polaire& point) {
+    point.convertir(*this);
+}
 
 double Cartesien::getX() const {
     return _x;
@@ -33,5 +36,6 @@ void Cartesien::convertir(Polaire& point) const {
 } 
 
 void Cartesien::convertir(Cartesien& point) const {
-    
-} 
+    point.setX(_x);
+    point.setY(_y);
+}

@@ -2,6 +2,10 @@
 #include "polaire.hpp"
 #include "cartesien.hpp"
 
+Polaire::Polaire(const Cartesien& point) {
+    point.convertir(*this);
+}
+
 double Polaire::getAngle() const {
     return _angle;
 }
@@ -28,5 +32,6 @@ void Polaire::convertir(Cartesien& point) const {
 } 
 
 void Polaire::convertir(Polaire& point) const {
-    
-}   
+    point.setAngle(_angle);
+    point.setDistance(_distance);
+}

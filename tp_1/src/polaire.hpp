@@ -11,6 +11,7 @@ private:
 public:
     Polaire(double a = 0., double d = 0.)
         : _angle(a), _distance(d) {}
+    Polaire(const Cartesien& point);
 
     //Polaire() 
     //    : Polaire(0., 0.) {}

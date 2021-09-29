@@ -11,6 +11,7 @@ private:
 public:
     Cartesien(double x = 0., double y = 0.)
         : _x(x), _y(y) {}
+    Cartesien(const Polaire& point);
 
     double getX() const;
     double getY() const;
