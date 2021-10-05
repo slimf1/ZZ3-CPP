@@ -13,9 +13,6 @@ public:
         : _angle(a), _distance(d) {}
     Polaire(const Cartesien& point);
 
-    //Polaire() 
-    //    : Polaire(0., 0.) {}
-
     double getAngle() const;
     double getDistance() const;
     void setAngle(double angle);

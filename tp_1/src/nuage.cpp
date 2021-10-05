@@ -40,8 +40,5 @@ Cartesien BarycentreCartesien::operator()(Nuage& nuage) {
 }
 
 Polaire BarycentrePolaire::operator()(Nuage& nuage) {
-    Polaire point;
-    auto cartPoint = barycentre(nuage);
-    cartPoint.convertir(point);
-    return point;
+    return Polaire(barycentre(nuage));
 }
