@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <iostream>
+#include <exception>
 #include "vecteur.hpp"
 
 int main() {
@@ -21,6 +22,20 @@ int main() {
     }
 
     std::cout << "\n";
+
+    const Vecteur<double> vector2 = vector;
+
+    for(auto el : vector) {
+        std::cout << el << " ";
+    }
+
+    std::cout << "\n";
+
+    try {
+        std::cout << vector[12];
+    } catch(std::exception& exc) {
+        std::cout << exc.what() << "\n";
+    }
 
     return EXIT_SUCCESS;
 }

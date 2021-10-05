@@ -96,11 +96,11 @@ size_t Vecteur<T>::size() const {
 template <typename T>
 void Vecteur<T>::push_back(T element) {
     if (_size == _capacity) {
-        T* old = _elements;
+        T* saved_elements = _elements;
         _capacity *= 2;
         _elements = new T[_capacity];
-        std::memcpy(_elements, old, _size * sizeof(T));
-        delete[] old;
+        std::memcpy(_elements, saved_elements, _size * sizeof(T));
+        delete[] saved_elements;
     }
     _elements[_size++] = element;
 }
@@ -112,7 +112,7 @@ typename Vecteur<T>::iterator Vecteur<T>::begin() {
 
 template <typename T>
 typename Vecteur<T>::iterator Vecteur<T>::end() {
-    return Vecteur<T>::iterator(_elements + _size);
+    return Vecteur<T>::iterator(&_elements[_size]);
 }
 
 template <typename T>
@@ -120,7 +120,7 @@ T Vecteur<T>::at(int index) const {
     if (index >= 0 && (size_t)index <= _size - 1) {
         return _elements[index];
     }
-    throw new std::out_of_range("index");
+    throw std::out_of_range("index out of bounds");
 }
 
 template <typename T>
@@ -128,7 +128,7 @@ T& Vecteur<T>::at(int index) {
     if (index >= 0 && (size_t)index <= _size - 1) {
         return _elements[index];
     }
-    throw new std::out_of_range("index");
+    throw std::out_of_range("index out of bounds");
 }
 
 template <typename T>
