@@ -1,6 +1,6 @@
 #include <cstdlib>
 #include <iostream>
-#include <exception>
+#include <stdexcept>
 #include "vecteur.hpp"
 
 int main() {

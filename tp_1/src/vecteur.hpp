@@ -2,7 +2,7 @@
 #define VECTEUR_HPP
 
 #include <cstring>
-#include <exception>
+#include <stdexcept>
 
 template <typename T>
 class Vecteur {
