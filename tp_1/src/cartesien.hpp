@@ -23,9 +23,11 @@ public:
 
     void afficher(std::ostream& stream) const override;
 
-    friend Cartesien operator+(const Cartesien& a, const Cartesien& b);
-    friend Cartesien operator/(const Cartesien& a, double scal);
-
+    Cartesien& operator+=(const Cartesien& other);
+    Cartesien& operator/=(double scal);
 };
+
+Cartesien operator+(const Cartesien& a, const Cartesien& b);
+Cartesien operator/(const Cartesien& a, double scal);
 
 #endif

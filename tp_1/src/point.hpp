@@ -6,16 +6,13 @@
 class Cartesien;
 class Polaire;
 
-class Point {
-public:
-    Point() = default;
-
+struct Point {
     virtual void afficher(std::ostream& stream) const = 0;
 
     virtual void convertir(Cartesien& point) const = 0;
     virtual void convertir(Polaire& point) const = 0;
-
-    friend std::ostream& operator<<(std::ostream& stream, const Point& point);
 };
+
+std::ostream& operator<<(std::ostream& stream, const Point& point);
 
 #endif

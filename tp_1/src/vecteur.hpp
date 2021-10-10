@@ -7,7 +7,7 @@
 template <typename T>
 class Vecteur {
 private:
-    static const size_t DEFAULT_CAPACITY = 10;
+    static constexpr size_t DEFAULT_CAPACITY = 10;
 
     T* _elements;
     size_t _size;
@@ -17,41 +17,56 @@ public:
     Vecteur();
     Vecteur(const Vecteur<T>&);
     Vecteur& operator=(const Vecteur<T>&);
-    virtual ~Vecteur();
+    ~Vecteur();
 
     size_t size() const;
     void push_back(T el);
-    T at(int index) const;
-    T operator[](int index) const;
+    const T& at(int index) const;
+    const T& operator[](int index) const;
     T& at(int index);
     T& operator[](int index);
 
-    class iterator {
+    class Iterator {
     private:
         T* _current;
     public:
-        iterator()
+        Iterator()
             : _current(nullptr) {}
-        iterator(T* current)
+        Iterator(T* current)
             : _current(current) {}
 
         T operator*() {
             return *_current;
         }
-        iterator& operator++() {
+        Iterator& operator++() {
             _current++;
             return *this;
         }
-        bool operator==(const iterator& other) {
+        Iterator operator++(int) {
+            auto temp = *this;
+            ++*_current;
+            return temp;
+        }
+        bool operator==(const Iterator& other) {
             return other._current == _current;
         }
-        bool operator!=(const iterator& other) {
+        bool operator!=(const Iterator& other) {
             return other._current != _current;
         }
     };
 
-    iterator begin();
-    iterator end();
+    using iterator = Iterator;
+    using const_iterator = Iterator;
+
+    /**
+     * Ou directement utiliser 
+     * using iterator = T*; 
+     * car les pointeurs redéfinissent 
+     * déjà les opérateurs 
+     */
+
+    iterator begin() const;
+    iterator end() const;
 };
 
 template <typename T>
@@ -74,13 +89,7 @@ Vecteur<T>::Vecteur(const Vecteur<T>& vector) {
 
 template <typename T>
 Vecteur<T>& Vecteur<T>::operator=(const Vecteur<T>& vector) {
-    if (&vector != this) {
-        _size = vector._size;
-        _capacity = vector._capacity;
-        _elements = new T[_capacity];
-        std::memcpy(_elements, vector._elements, _size * sizeof(T));
-    }
-    return *this;
+    return Vecteur<T>(vector);
 }
 
 template <typename T>
@@ -106,18 +115,18 @@ void Vecteur<T>::push_back(T element) {
 }
 
 template <typename T>
-typename Vecteur<T>::iterator Vecteur<T>::begin() {
+typename Vecteur<T>::iterator Vecteur<T>::begin() const {
     return Vecteur<T>::iterator(_elements);
 }
 
 template <typename T>
-typename Vecteur<T>::iterator Vecteur<T>::end() {
-    return Vecteur<T>::iterator(&_elements[_size]);
+typename Vecteur<T>::iterator Vecteur<T>::end() const {
+    return Vecteur<T>::iterator(_elements + _size);
 }
 
 template <typename T>
-T Vecteur<T>::at(int index) const {
-    if (index >= 0 && (size_t)index <= _size - 1) {
+const T& Vecteur<T>::at(int index) const {
+    if (index >= 0 && static_cast<size_t>(index) <= _size - 1) {
         return _elements[index];
     }
     throw std::out_of_range("index out of bounds");
@@ -125,14 +134,14 @@ T Vecteur<T>::at(int index) const {
 
 template <typename T>
 T& Vecteur<T>::at(int index) {
-    if (index >= 0 && (size_t)index <= _size - 1) {
+    if (index >= 0 && static_cast<size_t>(index) <= _size - 1) {
         return _elements[index];
     }
     throw std::out_of_range("index out of bounds");
 }
 
 template <typename T>
-T Vecteur<T>::operator[](int index) const {
+const T& Vecteur<T>::operator[](int index) const {
     return at(index);
 }
 

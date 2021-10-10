@@ -25,11 +25,6 @@ void Cartesien::afficher(std::ostream& stream) const {
     stream << "(x=" << _x << ";y=" << _y << ")";
 }
 
-std::ostream& operator<<(std::ostream& stream, const Point& point) {
-    point.afficher(stream);
-    return stream;
-}
-
 void Cartesien::convertir(Polaire& point) const {
     point.setAngle(atan2(_y, _x) * 180.0 / M_PI);
     point.setDistance(sqrt(_x*_x + _y*_y));
@@ -41,15 +36,19 @@ void Cartesien::convertir(Cartesien& point) const {
 }
 
 Cartesien operator+(const Cartesien& a, const Cartesien& b) {
-    Cartesien res;
-    res.setX(a.getX() + b.getX());
-    res.setY(a.getY() + b.getY());
-    return res;
+    return Cartesien(a.getX() + b.getX(), a.getY() + b.getY());
 }
 
 Cartesien operator/(const Cartesien& a, double scal) {
-    Cartesien res;
-    res.setX(a.getX() / scal);
-    res.setY(a.getY() / scal);
-    return res;
+    return Cartesien(a.getX() / scal, a.getY() / scal);
+}
+
+Cartesien& Cartesien::operator+=(const Cartesien& other) {
+    *this = *this + other;
+    return *this;
+}
+
+Cartesien& Cartesien::operator/=(double scal) {
+    *this = *this / scal;
+    return *this;
 }

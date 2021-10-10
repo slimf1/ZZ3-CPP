@@ -14,5 +14,18 @@ int main() {
       std::cout << *v << "\n";
     }
 
+    Cartesien p1(3.2, 5.5);
+    Cartesien p2(1.0, 1.0);
+
+    p1 += p2;
+    p2 /= 2.0;
+
+    std::cout << p1 << "\n";
+    std::cout << p2 << "\n";
+
+    for(auto point : points) {
+      delete point;
+    }
+
     return EXIT_SUCCESS;
 }
