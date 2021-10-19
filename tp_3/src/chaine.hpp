@@ -46,13 +46,19 @@ std::string chaine<double>(double element) {
     return std::to_string(element);
 }
 
+/*
 template <typename T, typename ...Types>
-std::string chaine(const T& head, const Types& ...tail) {
+std::string chaine(const T& el, const Types& ...others) {
     std::stringstream ss;
 
-    ss << head << " " << chaine(tail...);
+    ss << el << " " << chaine(others...);
 
     return ss.str();
+}*/
+
+template <typename ...Types>
+std::string chaine(Types&&... args) {
+    return ((chaine(args) + " ") + ...);
 }
 
 #endif // CHAINE_HPP
