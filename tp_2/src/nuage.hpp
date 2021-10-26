@@ -30,21 +30,38 @@ public:
     void ajouter(T element);
 };
 
-template <typename T>
-T barycentre_v1(const Nuage<T>& nuage) {
+/* On utilise une surcharge pour gérer les deux comportements
+   particuliers. On pourrait spécialiser les templates. */
+
+Cartesien barycentre_v1(const Nuage<Cartesien>& nuage) {
     Cartesien mean(0, 0);
-    Cartesien temp;
 
     if (nuage.size() == 0u){
         return mean;
     }
 
-    for(T point : nuage) {
-        point.convertir(temp);
-        mean += temp;
+    for(Cartesien point : nuage) {
+        mean += point;
     }
 
     return mean / static_cast<double>(nuage.size());
+}
+
+Polaire barycentre_v1(const Nuage<Polaire>& nuage) {
+    double averageDistance = 0.0;
+    double averageAngle = 0.0;
+
+    if (nuage.size() == 0u){
+        return Polaire(0, 0);
+    }
+
+    for(Polaire point : nuage) {
+        averageAngle += point.getAngle();
+        averageDistance += point.getDistance();
+    }
+
+    return Polaire(averageAngle / nuage.size(), 
+                   averageDistance / nuage.size());
 }
 
 template <typename C>
