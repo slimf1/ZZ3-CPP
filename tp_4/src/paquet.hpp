@@ -2,16 +2,15 @@
 #define PAQUET_HPP
 
 #include <vector>
+#include <memory>
+#include <ostream>
 #include "carte.hpp"
 #include "usine.hpp"
 
-class Paquet {
-private:
-    std::vector<Carte*> _cards;
+using paquet_t = std::vector<std::unique_ptr<Carte>>;
 
-public:
-    void remplir(UsineCarte& usine);
-    Carte* operator[](unsigned index);
-};
+void remplir(paquet_t& paquet, UsineCarte& usine);
+
+std::ostream& operator<<(std::ostream& stream, const paquet_t& paquet);
 
 #endif // PAQUET_HPP

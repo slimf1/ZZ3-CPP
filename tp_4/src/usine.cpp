@@ -6,7 +6,7 @@ UsineCarte::UsineCarte()
 }
 
 UsineCarte::UsineCarte(unsigned maxValue) 
-    : _maxValue(maxValue) {
+    : _currentCardNb(0), _maxValue(maxValue) {
 
 }
 

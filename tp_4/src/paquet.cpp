@@ -1,13 +1,16 @@
 #include "paquet.hpp"
 
-void Paquet::remplir(UsineCarte& usine) {
-    Carte* card = nullptr;
+void remplir(paquet_t& paquet, UsineCarte& usine) {
+	Carte* currentCard;
 
-    while ((card = usine.getCarte()) != nullptr) {
-        _cards.push_back(card);    
-    }
+	while ((currentCard = usine.getCarte()) != nullptr) {
+		paquet.push_back(std::unique_ptr<Carte>(currentCard));
+	}
 }
 
-Carte* Paquet::operator[](unsigned index) {
-    return _cards[index];
+std::ostream& operator<<(std::ostream& stream, const paquet_t& paquet) {
+	for (const auto& card : paquet) {
+		stream << card->getValeur() << " ";
+	}
+	return stream;
 }
