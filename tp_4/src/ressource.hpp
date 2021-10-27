@@ -18,6 +18,6 @@ public:
 
 using ressources_t = std::vector<std::weak_ptr<Ressource>>;
 
-std::ostream& operator<<(std::ostream& stream, ressources_t& ressources);
+std::ostream& operator<<(std::ostream& stream, const ressources_t& ressources);
 
 #endif // RESSOURCE_HPP

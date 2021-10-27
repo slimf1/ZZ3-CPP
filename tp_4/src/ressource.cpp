@@ -12,8 +12,8 @@ void Ressource::consommer(int qty) {
     _stock -= qty;
 }
 
-std::ostream& operator<<(std::ostream& stream, ressources_t& ressources) {
-    for (auto& ressource : ressources) {
+std::ostream& operator<<(std::ostream& stream, const ressources_t& ressources) {
+    for (const auto& ressource : ressources) {
         if (ressource.expired()) {
             stream << "- ";
         }
