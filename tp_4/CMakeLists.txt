@@ -36,10 +36,10 @@ message ( STATUS "Compiler flags: ${CMAKE_CXX_FLAGS}" )
 set ( ZZ3_HEADERS
       src/carte.hpp
       src/complexe.hpp
-      #src/consommateur.hpp
+      src/consommateur.hpp
       src/mouchard.hpp
       src/paquet.hpp
-      #src/ressource.hpp
+      src/ressource.hpp
       src/usine.hpp
       src/vecteur.hpp
     )
@@ -47,8 +47,9 @@ set ( ZZ3_HEADERS
 set ( ZZ3_SOURCES
       src/carte.cpp
       src/paquet.cpp
-      #src/ressource.cpp
+      src/ressource.cpp
       src/usine.cpp
+      src/consommateur.cpp
     )
 
 set ( ZZ3_HEADERS_TEST
