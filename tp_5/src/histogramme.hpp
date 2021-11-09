@@ -25,21 +25,16 @@ public:
 
     std::set<Classe, Compare> getClasses() const;
     std::multimap<Classe, Valeur> getValeurs() const;
+    auto getValeurs(const Classe& statClass) const;
     void ajouter(const Valeur& value);
     void ajouter(const Echantillon& sample);
 };
 
 template <typename Compare>
 void Histogramme<Compare>::populateClasses(double lower, double upper, unsigned classes) {
-    double currentBound = lower;
     double classSize = (upper - lower) / classes;
-    double currentUpperBound;
-
     for(auto i = 0u; i < classes; ++i) {
-        currentUpperBound = currentBound + classSize;
-        Classe statClass{currentBound, currentUpperBound};
-        _classes.insert(statClass);
-        currentBound = currentUpperBound;
+        _classes.insert(Classe(lower + classSize * i, lower + classSize * (i + 1)));
     }
 }
 
@@ -64,6 +59,11 @@ std::set<Classe, Compare> Histogramme<Compare>::getClasses() const {
 template <typename Compare>
 std::multimap<Classe, Valeur> Histogramme<Compare>::getValeurs() const {
     return _values;
+}
+
+template <typename Compare>
+auto Histogramme<Compare>::getValeurs(const Classe& statClass) const {
+    return std::equal_range(_values.begin(), _values.end(), statClass);
 }
 
 template <typename Compare>
