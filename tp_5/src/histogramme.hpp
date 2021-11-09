@@ -35,7 +35,7 @@ public:
     }
 
     void ajouter(const Valeur& value) {
-        auto correctClass = std::find_if(_classes.begin(), _classes.end(), [&](const Classe& statClass) {
+        auto correctClass = std::find_if(_classes.begin(), _classes.end(), [&value](const Classe& statClass) {
             return value.getNombre() >= statClass.getBorneInf() && value.getNombre() < statClass.getBorneSup();
         });
         Classe copyClass = *correctClass;
