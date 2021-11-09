@@ -3,7 +3,10 @@
 
 #include <algorithm>
 #include <functional>
+#include <map>
 #include <set>
+#include <iterator>
+#include <utility>
 #include "classe.hpp"
 #include "echantillon.hpp"
 
@@ -11,16 +14,18 @@ template <typename Compare = std::less<Classe>>
 class Histogramme {
 private:
     std::set<Classe, Compare> _classes;
+    std::multimap<Classe, Valeur> _values;
 
     void populateClasses(double lower, double upper, unsigned classes);
 
 public:
+    template <typename CompareOther>
+    Histogramme(const Histogramme<CompareOther>& other);
     Histogramme(double lower, double upper, unsigned classes);
 
-    std::set<Classe, Compare>& getClasses();
-
+    std::set<Classe, Compare> getClasses() const;
+    std::multimap<Classe, Valeur> getValeurs() const;
     void ajouter(const Valeur& value);
-
     void ajouter(const Echantillon& sample);
 };
 
@@ -39,13 +44,26 @@ void Histogramme<Compare>::populateClasses(double lower, double upper, unsigned 
 }
 
 template <typename Compare>
+template <typename CompareOther> // wtf?
+Histogramme<Compare>::Histogramme(const Histogramme<CompareOther>& other) {
+    for(auto& el : other.getClasses()) {
+        _classes.insert(el);
+    }
+}
+
+template <typename Compare>
 Histogramme<Compare>::Histogramme(double lower, double upper, unsigned classes) {
     populateClasses(lower, upper, classes);
 }
 
 template <typename Compare>
-std::set<Classe, Compare>& Histogramme<Compare>::getClasses() {
+std::set<Classe, Compare> Histogramme<Compare>::getClasses() const {
     return _classes;
+}
+
+template <typename Compare>
+std::multimap<Classe, Valeur> Histogramme<Compare>::getValeurs() const {
+    return _values;
 }
 
 template <typename Compare>
@@ -54,9 +72,10 @@ void Histogramme<Compare>::ajouter(const Valeur& value) {
         return value.getNombre() >= statClass.getBorneInf() && value.getNombre() < statClass.getBorneSup();
     });
     Classe copyClass = *correctClass;
-    _classes.erase(correctClass);
+    _classes.erase(correctClass); // erase w/ iterator
     copyClass.ajouter();
     _classes.insert(copyClass);
+    _values.insert(std::make_pair(copyClass, value));
 }
 
 template <typename Compare>
