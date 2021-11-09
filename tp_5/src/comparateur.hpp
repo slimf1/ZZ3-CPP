@@ -5,7 +5,7 @@
 
 template <typename T>
 struct ComparateurQuantite {
-    bool operator()(const Classe& a, const Classe& b) {
+    bool operator()(const Classe& a, const Classe& b) const {
         if (a.getQuantite() == b.getQuantite()) {
             return a < b;
         } else {

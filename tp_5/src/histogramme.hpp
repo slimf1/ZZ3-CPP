@@ -63,7 +63,7 @@ std::multimap<Classe, Valeur> Histogramme<Compare>::getValeurs() const {
 
 template <typename Compare>
 auto Histogramme<Compare>::getValeurs(const Classe& statClass) const {
-    return std::equal_range(_values.begin(), _values.end(), statClass);
+    return _values.equal_range(statClass);
 }
 
 template <typename Compare>
