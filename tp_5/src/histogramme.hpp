@@ -46,7 +46,7 @@ void Histogramme<Compare>::populateClasses(double lower, double upper, unsigned 
 template <typename Compare>
 template <typename CompareOther> // wtf?
 Histogramme<Compare>::Histogramme(const Histogramme<CompareOther>& other) {
-    for(auto& el : other.getClasses()) {
+    for(const auto& el : other.getClasses()) {
         _classes.insert(el);
     }
 }
