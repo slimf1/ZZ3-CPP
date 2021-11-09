@@ -48,4 +48,8 @@ void Classe::ajouter() {
     _quantity++;
 }
 
+bool operator<(const Classe& a, const Classe& b) {
+    return a.getBorneInf() < b.getBorneInf();
+}
+
 #endif // CLASSE_HPP

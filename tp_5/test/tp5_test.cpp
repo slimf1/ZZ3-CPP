@@ -9,8 +9,8 @@
 #include <histogramme.hpp>
 //#include <comparateur.hpp>
 
-using Histo = Histogramme; // A utiliser pour les tests 12-13
-//using Histo = Histogramme<>; // A utiliser a partir du test 14
+//using Histo = Histogramme; // A utiliser pour les tests 12-13
+using Histo = Histogramme<>; // A utiliser a partir du test 14
 
 // Tests //-----------------------------------------------------------------------------------------
 
@@ -209,7 +209,7 @@ TEST_CASE ( "TP3_Histogramme::Echantillon" ) {
 }
 
 //----------------------------------------------------------------------------------------------- 14
-/*TEST_CASE ( "TP3_Histogramme::Generique" ) {
+TEST_CASE ( "TP3_Histogramme::Generique" ) {
  using histo_t = Histogramme<>;
 
  histo_t h(5.0,15.0,5);
@@ -227,7 +227,7 @@ TEST_CASE ( "TP3_Histogramme::Echantillon" ) {
   REQUIRE ( c.getQuantite() == 0u );
   ++i;
  }
-}*/
+}
 
 //----------------------------------------------------------------------------------------------- 15
 /*TEST_CASE ( "TP3_Histogramme::FoncteurGreater" ) {
