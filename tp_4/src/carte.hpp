@@ -5,6 +5,7 @@ class UsineCarte;
 
 class Carte {
 private:
+    static int _instanceCounter;
     unsigned _value;
 
 private:
@@ -16,6 +17,8 @@ private:
     friend UsineCarte;
 
 public:
+    virtual ~Carte();
+    static int getCompteur();
     unsigned getValeur() const;
 };
 
