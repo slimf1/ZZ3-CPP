@@ -52,8 +52,15 @@ bool operator<(const Classe& a, const Classe& b) {
     return a.getBorneInf() < b.getBorneInf();
 }
 
-bool operator>(const Classe& a, const Classe& b) {
+bool operator>=(const Classe& a, const Classe& b) {
     return !(a < b);
 }
 
+bool operator>(const Classe& a, const Classe& b) {
+    return a.getBorneInf() > b.getBorneInf();
+}
+
+bool operator<=(const Classe& a, const Classe& b) {
+    return !(a > b);
+}
 #endif // CLASSE_HPP
