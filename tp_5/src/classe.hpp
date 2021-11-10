@@ -20,47 +20,12 @@ public:
     void ajouter();
 };
 
-double Classe::getBorneInf() const {
-    return _lowerBound;
-}
+bool operator<(const Classe& a, const Classe& b);
 
-void Classe::setBorneInf(double lower) {
-    _lowerBound = lower;
-}
+bool operator>=(const Classe& a, const Classe& b);
 
-double Classe::getBorneSup() const {
-    return _upperBound;
-}
+bool operator>(const Classe& a, const Classe& b);
 
-void Classe::setBorneSup(double upper) {
-    _upperBound = upper;
-}
+bool operator<=(const Classe& a, const Classe& b);
 
-unsigned Classe::getQuantite() const {
-    return _quantity;
-}
-
-void Classe::setQuantite(unsigned quantity)  {
-    _quantity = quantity;
-}
-
-void Classe::ajouter() {
-    _quantity++;
-}
-
-bool operator<(const Classe& a, const Classe& b) {
-    return a.getBorneInf() < b.getBorneInf();
-}
-
-bool operator>=(const Classe& a, const Classe& b) {
-    return !(a < b);
-}
-
-bool operator>(const Classe& a, const Classe& b) {
-    return a.getBorneInf() > b.getBorneInf();
-}
-
-bool operator<=(const Classe& a, const Classe& b) {
-    return !(a > b);
-}
 #endif // CLASSE_HPP

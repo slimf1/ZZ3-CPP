@@ -42,6 +42,9 @@ set ( ZZ3_HEADERS
     )
 
 set ( ZZ3_SOURCES
+      src/classe.cpp
+      src/echantillon.cpp
+      src/valeur.cpp
     )
 
 set ( ZZ3_HEADERS_TEST
