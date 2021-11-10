@@ -5,10 +5,13 @@
 #include <functional>
 #include <map>
 #include <set>
+#include <iostream>
 #include <iterator>
 #include <utility>
 #include "classe.hpp"
 #include "echantillon.hpp"
+
+#include <ostream>
 
 template <typename Compare = std::less<Classe>>
 class Histogramme {
@@ -29,6 +32,26 @@ public:
     void ajouter(const Valeur& value);
     void ajouter(const Echantillon& sample);
 };
+
+template <typename Compare>
+std::ostream& operator<<(std::ostream& stream, const Histogramme<Compare>& histogram) {
+    // On pourrait utiliser un for_each 
+    // mais quel intérêt quand les for( : ) existent ?
+    for(const Classe& statClass : histogram.getClasses()) {
+        auto interval = histogram.getValeurs(statClass);
+        stream << '[' << statClass.getBorneInf() 
+               << ';' << statClass.getBorneSup() 
+               << "] = " << statClass.getQuantite() << ' ';
+
+        // BidirectionalIterator
+        while (interval.first != interval.second) {
+            stream << (interval.first)->second << ' ';
+            ++(interval.first);
+        }
+        stream << '\n';
+    }
+    return stream;
+}
 
 template <typename Compare>
 void Histogramme<Compare>::populateClasses(double lower, double upper, unsigned classes) {
@@ -71,6 +94,8 @@ void Histogramme<Compare>::ajouter(const Valeur& value) {
     auto correctClass = std::find_if(_classes.begin(), _classes.end(), [&value](const Classe& statClass) {
         return value.getNombre() >= statClass.getBorneInf() && value.getNombre() < statClass.getBorneSup();
     });
+    if (correctClass == _classes.end()) return;
+
     Classe copyClass = *correctClass;
     _classes.erase(correctClass); // erase w/ iterator
     copyClass.ajouter();

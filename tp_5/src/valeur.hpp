@@ -2,6 +2,7 @@
 #define VALEUR_HPP
 
 #include <string>
+#include <ostream>
 
 class Valeur {
 private:
@@ -21,5 +22,7 @@ public:
     void setEtudiant(const std::string& name);
     const std::string& getEtudiant() const;
 };
+
+std::ostream& operator<<(std::ostream& stream, const Valeur& value);
 
 #endif // VALEUR_HPP

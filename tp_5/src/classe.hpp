@@ -21,11 +21,8 @@ public:
 };
 
 bool operator<(const Classe& a, const Classe& b);
-
 bool operator>=(const Classe& a, const Classe& b);
-
 bool operator>(const Classe& a, const Classe& b);
-
 bool operator<=(const Classe& a, const Classe& b);
 
 #endif // CLASSE_HPP

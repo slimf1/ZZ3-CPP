@@ -23,3 +23,8 @@ double Valeur::getNote() const {
 void Valeur::setNote(double value) {
     setNombre(value);
 }
+
+std::ostream& operator<<(std::ostream& stream, const Valeur& value) {
+  stream << "(" << value.getEtudiant() << ";" << value.getNote() << ")";
+  return stream;
+}
