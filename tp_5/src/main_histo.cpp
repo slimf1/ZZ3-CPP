@@ -10,7 +10,7 @@ int main() {
     std::normal_distribution<double> normDist(10., 5.);
     Echantillon sample;
     Histogramme<> defaultHist(0., 20., 10);
-    Histogramme<ComparateurQuantite<int>> quantityHist(0., 20., 10);
+    Histogramme<ComparateurQuantite<Classe>> quantityHist(0., 20., 10);
 
     for(auto i = 0u; i < 25u; ++i) {
         sample.ajouter(normDist(rng));

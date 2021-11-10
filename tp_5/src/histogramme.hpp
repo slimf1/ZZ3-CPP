@@ -11,8 +11,6 @@
 #include "classe.hpp"
 #include "echantillon.hpp"
 
-#include <ostream>
-
 template <typename Compare = std::less<Classe>>
 class Histogramme {
 private:
