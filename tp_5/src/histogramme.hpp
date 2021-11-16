@@ -24,8 +24,8 @@ public:
     Histogramme(const Histogramme<CompareOther>& other);
     Histogramme(double lower, double upper, unsigned classes);
 
-    std::set<Classe, Compare> getClasses() const;
-    std::multimap<Classe, Valeur> getValeurs() const;
+    const std::set<Classe, Compare>& getClasses() const;
+    const std::multimap<Classe, Valeur>& getValeurs() const;
     auto getValeurs(const Classe& statClass) const;
     void ajouter(const Valeur& value);
     void ajouter(const Echantillon& sample);
@@ -73,12 +73,12 @@ Histogramme<Compare>::Histogramme(double lower, double upper, unsigned classes) 
 }
 
 template <typename Compare>
-std::set<Classe, Compare> Histogramme<Compare>::getClasses() const {
+const std::set<Classe, Compare>& Histogramme<Compare>::getClasses() const {
     return _classes;
 }
 
 template <typename Compare>
-std::multimap<Classe, Valeur> Histogramme<Compare>::getValeurs() const {
+const std::multimap<Classe, Valeur>& Histogramme<Compare>::getValeurs() const {
     return _values;
 }
 

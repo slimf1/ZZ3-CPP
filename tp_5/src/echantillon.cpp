@@ -10,7 +10,7 @@ size_t Echantillon::getTaille() const {
     return _values.size();
 }
 
-Valeur Echantillon::getMinimum() const {
+const Valeur& Echantillon::getMinimum() const {
     if (getTaille() == 0u) {
         throw std::domain_error("Array is empty");
     }
@@ -19,7 +19,7 @@ Valeur Echantillon::getMinimum() const {
     });
 }
 
-Valeur Echantillon::getMaximum() const {
+const Valeur& Echantillon::getMaximum() const {
     if (getTaille() == 0u) {
         throw std::domain_error("Array is empty");
     }
@@ -28,7 +28,7 @@ Valeur Echantillon::getMaximum() const {
     });
 }
 
-Valeur Echantillon::getValeur(unsigned index) const {
+const Valeur& Echantillon::getValeur(unsigned index) const {
     if (index >= getTaille()) {
         throw std::out_of_range("Index out of range");
     }
