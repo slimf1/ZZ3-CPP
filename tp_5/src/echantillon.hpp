@@ -12,7 +12,7 @@ public:
     using value_type = Valeur;
 
     void ajouter(const Valeur& value);
-    void push_back(const Valeur& value) {ajouter(value);}
+    void push_back(const Valeur& value);
     size_t getTaille() const;
     const Valeur& getMinimum() const;
     const Valeur& getMaximum() const;

@@ -13,9 +13,9 @@ int main() {
     Histogramme<> defaultHist(0., 20., 10);
     Histogramme<ComparateurQuantite<Classe>> quantityHist(0., 20., 10);
 
-    for(auto i = 0u; i < 25u; ++i) {
-        sample.ajouter(normDist(rng));
-    }
+    std::generate_n(std::back_inserter<Echantillon>(sample), 25, [&normDist, &rng]() {
+        return normDist(rng);
+    });
 
     defaultHist.ajouter(sample);
     quantityHist.ajouter(sample);

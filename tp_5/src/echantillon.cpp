@@ -6,6 +6,10 @@ void Echantillon::ajouter(const Valeur& value) {
     _values.push_back(value);
 }
 
+void Echantillon::push_back(const Valeur& value) {
+    ajouter(value);
+}
+
 size_t Echantillon::getTaille() const {
     return _values.size();
 }
