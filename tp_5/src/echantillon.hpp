@@ -17,8 +17,6 @@ public:
     const Valeur& getMinimum() const;
     const Valeur& getMaximum() const;
     const Valeur& getValeur(unsigned index) const;
-    typename std::vector<Valeur>::iterator begin(); 
-    typename std::vector<Valeur>::iterator end(); 
 };
 
 #endif // ECHANTILLON_HPP
