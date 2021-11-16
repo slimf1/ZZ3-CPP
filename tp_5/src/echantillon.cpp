@@ -34,3 +34,11 @@ const Valeur& Echantillon::getValeur(unsigned index) const {
     }
     return _values[index];
 }
+
+typename std::vector<Valeur>::iterator Echantillon::begin() {
+    return _values.begin();
+}
+
+typename std::vector<Valeur>::iterator Echantillon::end() {
+    return _values.end();
+}
