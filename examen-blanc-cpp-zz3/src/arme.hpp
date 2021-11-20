@@ -9,7 +9,7 @@
 class Arme : public Item {
 private:    
     unsigned _durability;
-    Enchantement* _enchantement; // raw pointers ?
+    Enchantement* _enchantement;
 
 public:
 
@@ -19,8 +19,10 @@ public:
         }
     };
 
-    Arme(const std::string& name, double price, unsigned durability);
+    Arme(const std::string& name, double price = 0, unsigned durability = 0);
     Arme& operator=(const Arme& weapon);
+    Arme(const Arme& weapon);
+    Arme(Arme&& weapon);
     ~Arme();
 
     void utiliser();

@@ -13,12 +13,26 @@ Arme::~Arme() {
     }
 }
 
-// Arme& Arme::operator=(const Arme& weapon) {
-//     if (this != &weapon) {
-//         _enchantement = weapon._enchantement;
-//         _durability = weapon._durability;
-//     }
-//     return *this;    
+Arme::Arme(const Arme& weapon)
+    : Item(weapon.getNom(), weapon.getPrix()) {
+    *this = weapon;
+}
+
+Arme::Arme(Arme&& weapon)
+    : Item(weapon) {
+    if (&weapon != this) {
+        _durability = weapon._durability;
+        _enchantement = weapon._enchantement;
+        weapon._enchantement = nullptr;
+    }
+}
+
+Arme& Arme::operator=(const Arme& weapon) {
+    if (this != &weapon) {
+        _enchantement = new Enchantement(*weapon._enchantement);
+        _durability = weapon._durability;
+    }
+    return *this;    
 }
 
 void Arme::utiliser() {

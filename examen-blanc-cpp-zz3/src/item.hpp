@@ -16,4 +16,16 @@ public:
     bool estVendable() const;
 };
 
+struct TrieurAlphabetique {
+    bool operator()(Item* a, Item* b) const {
+        return (*a).getNom() > (*b).getNom();
+    }
+};
+
+struct TrieurPrix {
+    bool operator()(Item* a, Item* b) const {
+        return (*a).getPrix() > (*b).getPrix();
+    }
+};
+
 #endif // ITEM_HPP

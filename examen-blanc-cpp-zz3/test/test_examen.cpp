@@ -4,12 +4,12 @@
 
 #include <item.hpp>
 #include <arme.hpp>
-// #include <inventaire.hpp>
+#include <inventaire.hpp>
 #include <enchantement.hpp>
 // #include <fabricant.hpp>
 
-//using Inv = Inventaire;
-// using Inv = Inventaire<TrieurAlphabetique>;
+// using Inv = Inventaire;
+using Inv = Inventaire<TrieurAlphabetique>;
 
 /*
  Tests 1 et 2 : Constructeurs d'items
@@ -105,50 +105,50 @@ TEST_CASE ( "Arme:Constructeur copie" ) {
  * Cette partie n'est pas au programme pour le TP noté (Décembre 2020)
  */
 TEST_CASE ( "Arme:Constructeur déplacement" ) {
-    // Enchantement * enchantement = new Enchantement(3.2f);
-    // Arme epeeVictime("Excalibur", 3, 10);
+    Enchantement * enchantement = new Enchantement(3.2f);
+    Arme epeeVictime("Excalibur", 3, 10);
 
-    // epeeVictime.enchanter(enchantement);
-    // Arme epee(std::move(epeeVictime));
+    epeeVictime.enchanter(enchantement);
+    Arme epee(std::move(epeeVictime));
 
-    // REQUIRE ( epee.getEnchantement() == enchantement );
-    // REQUIRE ( epee.getNom() == "Excalibur [10]" );
-    // REQUIRE ( epee.getPrix() == 3 );
+    REQUIRE ( epee.getEnchantement() == enchantement );
+    REQUIRE ( epee.getNom() == "Excalibur [10]" );
+    REQUIRE ( epee.getPrix() == 3 );
 
-    // // Autre manière de vérifier la présence du constructeur, mais pas de vérifier son bon fonctionnement.
-    // REQUIRE (std::is_move_constructible<Arme>::value);
+    // Autre manière de vérifier la présence du constructeur, mais pas de vérifier son bon fonctionnement.
+    REQUIRE (std::is_move_constructible<Arme>::value);
 }
 
 TEST_CASE ( "Arme:Affectation par déplacement" ) {
     // J'ai pas trouver mieux, essayer de la faire bien cette redéfinition d'opérateur.
-    // REQUIRE (std::is_move_assignable<Arme>::value);
+    REQUIRE (std::is_move_assignable<Arme>::value);
 }
 
 /*
  * Test 10 : Un container
  */
 TEST_CASE ( "Inventaire:Stokage" ) {
-    // Inv inventaire;
-    // Item bestBook("Effectiv Modern C++", 15);
-    // const Inv inventaire2;
+    Inv inventaire;
+    Item bestBook("Effectiv Modern C++", 15);
+    const Inv inventaire2;
     
-    // REQUIRE (inventaire.getTaille() == 0);
+    REQUIRE (inventaire.getTaille() == 0);
 
-    // inventaire.ajouter(&bestBook);
-    // REQUIRE (inventaire.getTaille() == 1);
+    inventaire.ajouter(&bestBook);
+    REQUIRE (inventaire.getTaille() == 1);
 
-    // REQUIRE (inventaire2.getTaille() == 0);
+    REQUIRE (inventaire2.getTaille() == 0);
 }
 
 /*
  * Test 11 : Enum
  */
 TEST_CASE ( "Inventaire:Catégorie" ) {
-    // Inv::Categorie categorie = Inv::Categorie::ARME; 
+    Inv::Categorie categorie = Inv::Categorie::ARME; 
 
-    // REQUIRE ( static_cast<char>(categorie) == 'A' );
-    // REQUIRE ( static_cast<char>(Inv::Categorie::CONSOMMABLE) == 'C' );
-    // REQUIRE ( static_cast<char>(Inv::Categorie::RARE) == 'R' );
+    REQUIRE ( static_cast<char>(categorie) == 'A' );
+    REQUIRE ( static_cast<char>(Inv::Categorie::CONSOMMABLE) == 'C' );
+    REQUIRE ( static_cast<char>(Inv::Categorie::RARE) == 'R' );
 }
 
 /*
@@ -158,107 +158,107 @@ TEST_CASE ( "Inventaire:Catégorie" ) {
  * On ne touche pas à autre chose qu'à Inventaire.
  */
 TEST_CASE ( "Inventaire:Catégorisation" ) {
-    // Inv inventaire;
-    // Item graal("Graal");
-    // Item baton("Bâton");
+    Inv inventaire;
+    Item graal("Graal");
+    Item baton("Bâton");
 
-    // Inv::list_t const & itemsRares = inventaire.getItemsParCategorie(Inv::Categorie::RARE);
-    // Inv::list_t const & itemsNormaux = inventaire.getItemsParCategorie(Inv::Categorie::NORMAL);
-    // Inv::list_t const & itemsArmes = inventaire.getItemsParCategorie(Inv::Categorie::ARME);
-    // Inv::list_t const & itemsConsommables = inventaire.getItemsParCategorie(Inv::Categorie::CONSOMMABLE);
+    inventaire.ajouter(&graal, Inv::Categorie::RARE);
+    inventaire.ajouter(&baton);
 
-    // inventaire.ajouter(&graal, Inv::Categorie::RARE);
-    // inventaire.ajouter(&baton);
+    Inv::list_t const & itemsRares = inventaire.getItemsParCategorie(Inv::Categorie::RARE);
+    Inv::list_t const & itemsNormaux = inventaire.getItemsParCategorie(Inv::Categorie::NORMAL);
+    Inv::list_t const & itemsArmes = inventaire.getItemsParCategorie(Inv::Categorie::ARME);
+    Inv::list_t const & itemsConsommables = inventaire.getItemsParCategorie(Inv::Categorie::CONSOMMABLE);
 
-    // REQUIRE ( itemsRares.size() == 1 );
-    // REQUIRE ( itemsNormaux.size() == 1 );
-    // REQUIRE ( itemsArmes.size() == 0 );
-    // REQUIRE ( itemsConsommables.size() == 0 );
+    REQUIRE ( itemsRares.size() == 1 );
+    REQUIRE ( itemsNormaux.size() == 1 );
+    REQUIRE ( itemsArmes.size() == 0 );
+    REQUIRE ( itemsConsommables.size() == 0 );
 
-    // REQUIRE ( inventaire.getTaille() == 2);
+    REQUIRE ( inventaire.getTaille() == 2);
 }
 
 /*
  * Test 13 : Tri
  */
 TEST_CASE ( "Inventaire:Tri" ) {
-    // Inv inventaire;
+    Inv inventaire;
     
-    // Item baton("Bâton");
-    // Item livre("Livre");
-    // Item amulette("Amulette");
-    // Item xylophone("Xylophone");
+    Item baton("Bâton");
+    Item livre("Livre");
+    Item amulette("Amulette");
+    Item xylophone("Xylophone");
 
-    // std::array<std::string, 4> array = {"Amulette", "Bâton", "Livre", "Xylophone"};
+    std::array<std::string, 4> array = {"Amulette", "Bâton", "Livre", "Xylophone"};
 
-    // Inv::list_t const & itemsNormaux = inventaire.getItemsParCategorie(Inv::Categorie::NORMAL);
+    Inv::list_t const & itemsNormaux = inventaire.getItemsParCategorie(Inv::Categorie::NORMAL);
     
-    // inventaire.ajouter(&baton);
-    // inventaire.ajouter(&livre);
-    // inventaire.ajouter(&amulette);
-    // inventaire.ajouter(&xylophone); // Grave chelou d'avoir un xylophone...
+    inventaire.ajouter(&baton);
+    inventaire.ajouter(&livre);
+    inventaire.ajouter(&amulette);
+    inventaire.ajouter(&xylophone); // Grave chelou d'avoir un xylophone...
 
-    // unsigned i = 0;
-    // std::for_each(itemsNormaux.cbegin(), itemsNormaux.cend(), [&array, &i](Item * item){
-    //     REQUIRE ( item->getNom() == array[i++] );
-    // });
+    unsigned i = 0;
+    std::for_each(itemsNormaux.cbegin(), itemsNormaux.cend(), [&array, &i](Item * item){
+        REQUIRE ( item->getNom() == array[i++] );
+    });
 }
 
 /*
  * Test 14 : Plus de tris
  */
 TEST_CASE ( "Inventaire:Tris sélectifs" ) {
-    // Item baton("Bâton", 89);
-    // Item livre("Livre", 19);
-    // Item amulette("Amulette", 35);
-    // Item xylophone("Xylophone", 465);
+    Item baton("Bâton", 89);
+    Item livre("Livre", 19);
+    Item amulette("Amulette", 35);
+    Item xylophone("Xylophone", 465);
 
-    // Inventaire<TrieurAlphabetique> inventaire;
-    // std::array<std::string, 4> array = {"Amulette", "Bâton", "Livre", "Xylophone"};
+    Inventaire<TrieurAlphabetique> inventaire;
+    std::array<std::string, 4> array = {"Amulette", "Bâton", "Livre", "Xylophone"};
 
-    // Inv::list_t const & itemsNormaux = inventaire.getItemsParCategorie(Inv::Categorie::NORMAL);
+    Inv::list_t const & itemsNormaux = inventaire.getItemsParCategorie(Inv::Categorie::NORMAL);
     
-    // inventaire.ajouter(&baton);
-    // inventaire.ajouter(&livre);
-    // inventaire.ajouter(&amulette);
-    // inventaire.ajouter(&xylophone); // Grave chelou d'avoir un xylophone...
+    inventaire.ajouter(&baton);
+    inventaire.ajouter(&livre);
+    inventaire.ajouter(&amulette);
+    inventaire.ajouter(&xylophone); // Grave chelou d'avoir un xylophone...
 
-    // unsigned i = 0;
-    // std::for_each(itemsNormaux.cbegin(), itemsNormaux.cend(), [&array, &i](Item * item){
-    //     REQUIRE ( item->getNom() == array[i++] );
-    // });
+    unsigned i = 0;
+    std::for_each(itemsNormaux.cbegin(), itemsNormaux.cend(), [&array, &i](Item * item){
+        REQUIRE ( item->getNom() == array[i++] );
+    });
 
 
-    // Inventaire<TrieurPrix> inventaire2;
-    // std::array<std::string, 4> array2 = {"Livre", "Amulette", "Bâton", "Xylophone"};
+    Inventaire<TrieurPrix> inventaire2;
+    std::array<std::string, 4> array2 = {"Livre", "Amulette", "Bâton", "Xylophone"};
 
-    // Inventaire<TrieurPrix>::list_t const & itemsNormaux2 = inventaire2.getItemsParCategorie(Inventaire<TrieurPrix>::Categorie::NORMAL);
+    Inventaire<TrieurPrix>::list_t const & itemsNormaux2 = inventaire2.getItemsParCategorie(Inventaire<TrieurPrix>::Categorie::NORMAL);
 
-    // inventaire2.ajouter(&baton);
-    // inventaire2.ajouter(&livre);
-    // inventaire2.ajouter(&amulette);
-    // inventaire2.ajouter(&xylophone); // Grave cher en plus...
+    inventaire2.ajouter(&baton);
+    inventaire2.ajouter(&livre);
+    inventaire2.ajouter(&amulette);
+    inventaire2.ajouter(&xylophone); // Grave cher en plus...
 
-    // i = 0;
-    // std::for_each(itemsNormaux2.cbegin(), itemsNormaux2.cend(), [&array2, &i](Item * item){
-    //     REQUIRE ( item->getNom() == array2[i++] );
-    // });
+    i = 0;
+    std::for_each(itemsNormaux2.cbegin(), itemsNormaux2.cend(), [&array2, &i](Item * item){
+        REQUIRE ( item->getNom() == array2[i++] );
+    });
 }
 
 /*
  * Test 15 : Item ou arme ?
  */
 TEST_CASE ( "Inventaire:Item ou Arme" ) {
-    // Inv inventaire;
+    Inv inventaire;
     
-    // Arme gourdin("Gourdin");
+    Arme gourdin("Gourdin");
 
-    // inventaire.ajouter(static_cast<Item*>(&gourdin));
-    // Inv::list_t const & itemsNormaux = inventaire.getItemsParCategorie(Inv::Categorie::NORMAL);
-    // Inv::list_t const & itemsArmes = inventaire.getItemsParCategorie(Inv::Categorie::ARME);
+    inventaire.ajouter(static_cast<Item*>(&gourdin));
+    Inv::list_t const & itemsNormaux = inventaire.getItemsParCategorie(Inv::Categorie::NORMAL);
+    Inv::list_t const & itemsArmes = inventaire.getItemsParCategorie(Inv::Categorie::ARME);
    
-    // REQUIRE ( itemsNormaux.size() == 0 );
-    // REQUIRE ( itemsArmes.size() == 1 );
+    REQUIRE ( itemsNormaux.size() == 0 );
+    REQUIRE ( itemsArmes.size() == 1 );
 }
 
 /*
