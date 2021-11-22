@@ -9,7 +9,7 @@
 class Arme : public Item {
 private:    
     unsigned _durability;
-    Enchantement* _enchantement;
+    Enchantement* _enchantement = nullptr;
 
 public:
 

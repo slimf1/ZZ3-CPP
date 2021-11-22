@@ -4,12 +4,13 @@
 #include "arme.hpp"
 
 Arme::Arme(const std::string& name, double price, unsigned durability)
-    : Item(name, price), _durability(durability), _enchantement(nullptr) {
+    : Item(name, price), _durability(durability) {
 }
 
 Arme::~Arme() {
     if (_enchantement != nullptr) {
         delete _enchantement;
+        _enchantement = nullptr;
     }
 }
 
@@ -29,7 +30,9 @@ Arme::Arme(Arme&& weapon)
 
 Arme& Arme::operator=(const Arme& weapon) {
     if (this != &weapon) {
-        _enchantement = new Enchantement(*weapon._enchantement);
+        if (weapon._enchantement != nullptr) {
+            _enchantement = new Enchantement(*weapon._enchantement);
+        }
         _durability = weapon._durability;
     }
     return *this;    
