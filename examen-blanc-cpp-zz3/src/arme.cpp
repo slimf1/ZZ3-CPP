@@ -53,11 +53,9 @@ std::string Arme::getNom() const {
 
 Enchantement* Arme::getEnchantement() {
     return _enchantement;
-    // return _enchantement.get();
 }
 
 void Arme::enchanter(Enchantement* enchantement) {
     _enchantement = enchantement;
-    // _enchantement = std::make_shared<Enchantement>(*enchantement);
 }
 

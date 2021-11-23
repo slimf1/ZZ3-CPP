@@ -162,13 +162,14 @@ TEST_CASE ( "Inventaire:Catégorisation" ) {
     Item graal("Graal");
     Item baton("Bâton");
 
-    inventaire.ajouter(&graal, Inv::Categorie::RARE);
-    inventaire.ajouter(&baton);
 
     Inv::list_t const & itemsRares = inventaire.getItemsParCategorie(Inv::Categorie::RARE);
     Inv::list_t const & itemsNormaux = inventaire.getItemsParCategorie(Inv::Categorie::NORMAL);
     Inv::list_t const & itemsArmes = inventaire.getItemsParCategorie(Inv::Categorie::ARME);
     Inv::list_t const & itemsConsommables = inventaire.getItemsParCategorie(Inv::Categorie::CONSOMMABLE);
+
+    inventaire.ajouter(&graal, Inv::Categorie::RARE);
+    inventaire.ajouter(&baton);
 
     REQUIRE ( itemsRares.size() == 1 );
     REQUIRE ( itemsNormaux.size() == 1 );
