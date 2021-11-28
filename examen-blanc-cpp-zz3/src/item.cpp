@@ -16,3 +16,11 @@ std::string Item::getNom() const {
 double Item::getPrix() const {
     return _price;
 }
+
+void Item::setFabricant(Fabricant* factory) {
+    _factory = factory;
+}
+
+Fabricant* Item::getFabricant() const {
+    return _factory;
+}

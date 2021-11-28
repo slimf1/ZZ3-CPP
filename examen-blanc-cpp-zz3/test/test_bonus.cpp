@@ -1,8 +1,9 @@
 #include "catch.hpp"
 
-// #include <arme.hpp>
-// #include <adaptateur.hpp>
-// #include <activateur.hpp>
+#include <iostream>
+#include <arme.hpp>
+#include <adaptateur.hpp>
+#include <activateur.hpp>
 
 /*
  * Bonus test 1 : Adapter l'arme à une autre API
@@ -13,13 +14,13 @@
  * Indice : Patron Adaptateur
  */
 TEST_CASE ( "Item:API" ) {
-    // Arme epee("Grosse épée", 50, 20);
+    Arme epee("Grosse épée", 50, 20);
 
-    // Activateur<Adaptateur<Arme>>(Adaptateur<Arme>(epee), 10);
+    Activateur<Adaptateur<Arme>>(Adaptateur<Arme>(epee), 10);
 
-    // REQUIRE_NOTHROW ( epee.utiliser() );
+    REQUIRE_NOTHROW ( epee.utiliser() );
 
-    // Activateur<Adaptateur<Arme>>(Adaptateur<Arme>(epee), 9);
+    Activateur<Adaptateur<Arme>>(Adaptateur<Arme>(epee), 9);
     
-    // REQUIRE_THROWS ( epee.utiliser() );
+    REQUIRE_THROWS ( epee.utiliser() );
 }

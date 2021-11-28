@@ -20,7 +20,7 @@ Arme::Arme(const Arme& weapon)
 }
 
 Arme::Arme(Arme&& weapon)
-    : Item(weapon) {
+    : Item(std::move(weapon)) {
     if (&weapon != this) {
         _durability = weapon._durability;
         _enchantement = weapon._enchantement;

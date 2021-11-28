@@ -6,7 +6,7 @@
 #include <arme.hpp>
 #include <inventaire.hpp>
 #include <enchantement.hpp>
-// #include <fabricant.hpp>
+#include <fabricant.hpp>
 
 // using Inv = Inventaire;
 using Inv = Inventaire<TrieurAlphabetique>;
@@ -267,10 +267,10 @@ TEST_CASE ( "Inventaire:Item ou Arme" ) {
  * Il a un nom et un conteneur. Ce conteneur contient la liste des noms d'items qu'il peut produire.
  */
 TEST_CASE ( "Fabricant:Initial" ) {
-    // const Fabricant marcorporate("Marcorporate");
+    const Fabricant marcorporate("Marcorporate");
 
-    // REQUIRE ( marcorporate.getNom() == "Marcorporate" );
-    // REQUIRE ( marcorporate.hasItemsEnProduction() == false );
+    REQUIRE ( marcorporate.getNom() == "Marcorporate" );
+    REQUIRE ( marcorporate.hasItemsEnProduction() == false );
 }
 
 /*
@@ -278,23 +278,23 @@ TEST_CASE ( "Fabricant:Initial" ) {
  * On peut indiquer a un fabricant les items qu'il peut fabriquer. Il peut ensuite les fabriquer.
  */
 TEST_CASE ( "Fabricant:Production" ) {
-    // Fabricant marcorporate("Marcorporate");
-    // marcorporate.ajouterProduction("Faucille");
-    // marcorporate.ajouterProduction("Marteau");
+    Fabricant marcorporate("Marcorporate");
+    marcorporate.ajouterProduction("Faucille");
+    marcorporate.ajouterProduction("Marteau");
 
-    // REQUIRE ( marcorporate.hasItemsEnProduction() == true );
+    REQUIRE ( marcorporate.hasItemsEnProduction() == true );
 
-    // Item * faucille = marcorporate.produire("Faucille");
-    // Item * porteFeuille = marcorporate.produire("Porte-feuille");
+    Item * faucille = marcorporate.produire("Faucille");
+    Item * porteFeuille = marcorporate.produire("Porte-feuille");
 
-    // REQUIRE ( faucille != nullptr );
-    // REQUIRE ( porteFeuille == nullptr );
+    REQUIRE ( faucille != nullptr );
+    REQUIRE ( porteFeuille == nullptr );
 
     
-    // REQUIRE ( faucille->getNom() == "[Marcorporate] Faucille");
+    REQUIRE ( faucille->getNom() == "[Marcorporate] Faucille");
 
-    // delete faucille;
-    // delete porteFeuille;
+    delete faucille;
+    delete porteFeuille;
 }
 
 /*
@@ -304,14 +304,14 @@ TEST_CASE ( "Fabricant:Production" ) {
  * Setter dans l'item appelé par produire().
  */
 TEST_CASE ( "Fabricant:Appartenance" ) {
-    // Fabricant marcorporate("Marcorporate");
-    // marcorporate.ajouterProduction("Faucille");
+    Fabricant marcorporate("Marcorporate");
+    marcorporate.ajouterProduction("Faucille");
 
-    // Item porteFeuille("Porte-Feuille");
-    // REQUIRE ( porteFeuille.getFabricant() == nullptr );
+    Item porteFeuille("Porte-Feuille");
+    REQUIRE ( porteFeuille.getFabricant() == nullptr );
 
-    // Item * faucille = marcorporate.produire("Faucille");
-    // REQUIRE ( faucille->getFabricant() == &marcorporate );
+    Item * faucille = marcorporate.produire("Faucille");
+    REQUIRE ( faucille->getFabricant() == &marcorporate );
 
-    // delete faucille;
+    delete faucille;
 }

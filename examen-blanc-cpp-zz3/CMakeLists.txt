@@ -11,8 +11,7 @@ set(ZZ_HEADER
     src/arme.hpp
     src/enchantement.hpp
     src/inventaire.hpp
-    # src/fabricant.hpp
-    # src/adaptateur.hpp # Seulement pour les tests bonus
+    src/adaptateur.hpp # Seulement pour les tests bonus
 )
 
 # Ne pas toucher le reste.

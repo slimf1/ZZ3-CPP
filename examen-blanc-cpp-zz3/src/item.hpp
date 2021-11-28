@@ -3,10 +3,13 @@
 
 #include <string>
 
+class Fabricant;
+
 class Item {
 private:
     std::string _name;
     double _price;
+    Fabricant* _factory = nullptr;
 
 public:
     Item(const std::string& name, double price = 0.0);
@@ -14,6 +17,9 @@ public:
     virtual std::string getNom() const;
     double getPrix() const;
     bool estVendable() const;
+    void setFabricant(Fabricant* factory);
+    Fabricant* getFabricant() const;
+    virtual ~Item() = default;
 };
 
 struct TrieurAlphabetique {
